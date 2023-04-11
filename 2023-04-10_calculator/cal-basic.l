@@ -8,6 +8,8 @@
 "+"		{return(Plus);}
 "-"		{return(Minus);}
 "="		{return(Equal);}
+"*"		{return(Multiply);}
+"/"		{return(Divide);}
 [ \t\n]+ 	{;}
 .		{printf("Unexpected Input %c\n", yytext[0]);}
 
