@@ -10,6 +10,7 @@
 "="		{return(Equal);}
 "*"		{return(Multiply);}
 "/"		{return(Divide);}
+"^"		{return(Power);}
 [ \t\n]+ 	{;}
 .		{printf("Unexpected Input %c\n", yytext[0]);}
 
