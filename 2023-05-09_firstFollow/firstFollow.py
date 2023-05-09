@@ -54,18 +54,28 @@ def compute_follow(symbol):
         follow_set.add("$")
     
 
-    
+    # For left_symbol(the non-terminal), and its right_rules(productions) 
     for left_symbol, right_rules in grammar.items():
+
+        # For each production in productions
         for right_rule in right_rules:
+
+            # If the non-terminal(symbol) for which follow is computed
+            # is present on the right side of any production
+            # get the index of the symbol
             if symbol in right_rule:
                 symbol_index = right_rule.index(symbol)
 
+                # If the index is not at the end, compute first of (index+1)
                 if symbol_index < len(right_rule)-1:
                     sub_follow_set = compute_first(right_rule[symbol_index + 1])
 
+                    # If epsilon present in set, find first(left_symbol)
                     if "epsilon" in sub_follow_set:
                         sub_follow_set.remove("epsilon")
                         sub_follow_set.update(compute_follow(left_symbol))
+                    
+                    # follow_set = follow_set union sub_follow_set
                     follow_set.update(sub_follow_set)
                 else:
                     follow_set.update(compute_follow(left_symbol))
